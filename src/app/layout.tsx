@@ -1,6 +1,7 @@
 // app/layout.tsx
-import '/Temp/trabaigui/my-app/styles/globals.css';
-import Navbar from '/Temp/trabaigui/my-app/components/Navbar';
+import './globals.css';
+import Navbar from './components/Navbar';
+
 
 export const metadata = {
   title: 'Vacinação',
@@ -11,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body>
-        <Navbar />
+        <Navbar/>
         <main style={{ padding: '20px' }}>{children}</main>
       </body>
     </html>
