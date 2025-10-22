@@ -1,6 +1,20 @@
 'use client';
 
-import { Container, Box, Typography, Grid, Card, CardContent, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import {
+  Container,
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import SchoolIcon from '@mui/icons-material/School';
@@ -164,18 +178,31 @@ export default function CalendarioPage() {
             Vacinas por Faixa Etária
           </Typography>
           <Typography variant="body1" sx={{ mb: 4, color: 'text.secondary', fontSize: '1.1rem' }}>
-            O Programa Nacional de Imunizações (PNI) oferece gratuitamente todas as vacinas recomendadas 
+            O Programa Nacional de Imunizações (PNI) oferece gratuitamente todas as vacinas recomendadas{' '}
             pela Organização Mundial da Saúde (OMS) para cada faixa etária.
           </Typography>
 
-          <Grid container spacing={3}>
+          {/* Substituindo Grid container por Box flex container */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 24 / 8, // spacing={3} equivale a 3*8=24 px gap
+              justifyContent: 'center',
+            }}
+          >
             {ageGroups.map((group, index) => (
-              <Grid key={index}>
+              <Box
+                key={index}
+                sx={{
+                  flex: '1 1 250px',
+                  maxWidth: '250px',
+                  display: 'flex',
+                }}
+              >
                 <AgeGroupCard>
                   <CardContent sx={{ textAlign: 'center', p: 3 }}>
-                    <IconBox color={group.color}>
-                      {group.icon}
-                    </IconBox>
+                    <IconBox color={group.color}>{group.icon}</IconBox>
                     <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
                       {group.title}
                     </Typography>
@@ -192,16 +219,19 @@ export default function CalendarioPage() {
                     />
                   </CardContent>
                 </AgeGroupCard>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
 
         <Box sx={{ mb: 6 }}>
           <Typography variant="h4" sx={{ fontWeight: 700, mb: 3, color: '#333' }}>
             Calendário Infantil Detalhado (0-10 anos)
           </Typography>
-          <TableContainer component={Paper} sx={{ borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+          <TableContainer
+            component={Paper}
+            sx={{ borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+          >
             <Table>
               <TableHead>
                 <TableRow sx={{ bgcolor: '#f8f9fa' }}>
@@ -212,9 +242,7 @@ export default function CalendarioPage() {
               <TableBody>
                 {childSchedule.map((row, index) => (
                   <TableRow key={index} sx={{ '&:hover': { bgcolor: '#f8f9fa' } }}>
-                    <TableCell sx={{ fontWeight: 600, color: '#667eea', minWidth: '120px' }}>
-                      {row.age}
-                    </TableCell>
+                    <TableCell sx={{ fontWeight: 600, color: '#667eea', minWidth: '120px' }}>{row.age}</TableCell>
                     <TableCell>{row.vaccines}</TableCell>
                   </TableRow>
                 ))}
@@ -227,10 +255,26 @@ export default function CalendarioPage() {
           <Typography variant="h4" sx={{ fontWeight: 700, mb: 3, color: '#333' }}>
             Principais Vacinas e suas Proteções
           </Typography>
-          <Grid container spacing={3}>
+
+          {/* Substituindo Grid container por Box flex container */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 24 / 8,
+              justifyContent: 'center',
+            }}
+          >
             {vaccineDetails.map((vaccine, index) => (
-              <Grid key={index}>
-                <Card sx={{ borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', height: '100%' }}>
+              <Box key={index} sx={{ flex: '1 1 280px', maxWidth: '280px', display: 'flex' }}>
+                <Card
+                  sx={{
+                    borderRadius: '16px',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+                    height: '100%',
+                    width: '100%',
+                  }}
+                >
                   <CardContent sx={{ p: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, color: '#667eea' }}>
                       {vaccine.name}
@@ -243,106 +287,121 @@ export default function CalendarioPage() {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
 
         <Box sx={{ bgcolor: '#f8f9fa', borderRadius: '20px', p: 4, mb: 6 }}>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#333' }}>
             Grupos Especiais
           </Typography>
-          <Grid container spacing={3}>
-            <Grid>
-              <Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#667eea' }}>
-                  👶 Gestantes
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • dTpa (contra difteria, tétano e coqueluche)
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Hepatite B
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Influenza (gripe)
-                </Typography>
-                <Typography variant="body2">
-                  • COVID-19
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid>
-              <Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#667eea' }}>
-                  👴 Idosos (60+)
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Influenza (anual)
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Pneumocócica 23
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Herpes Zóster
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • COVID-19 (reforços)
-                </Typography>
-                <Typography variant="body2">
-                  • dT (a cada 10 anos)
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid>
-              <Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#667eea' }}>
-                  🏥 Profissionais de Saúde
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Hepatite B
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Tríplice viral
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • dTpa
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 1 }}>
-                  • Influenza (anual)
-                </Typography>
-                <Typography variant="body2">
-                  • Varicela
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
+
+          {/* Substituindo Grid container por Box flex container */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 24 / 8,
+              justifyContent: 'center',
+            }}
+          >
+            <Box sx={{ flex: '1 1 280px', maxWidth: '280px' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#667eea' }}>
+                👶 Gestantes
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • dTpa (contra difteria, tétano e coqueluche)
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Hepatite B
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Influenza (gripe)
+              </Typography>
+              <Typography variant="body2">• COVID-19</Typography>
+            </Box>
+
+            <Box sx={{ flex: '1 1 280px', maxWidth: '280px' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#667eea' }}>
+                👴 Idosos (60+)
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Influenza (anual)
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Pneumocócica 23
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Herpes Zóster
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • COVID-19 (reforços)
+              </Typography>
+              <Typography variant="body2">• dT (a cada 10 anos)</Typography>
+            </Box>
+
+            <Box sx={{ flex: '1 1 280px', maxWidth: '280px' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#667eea' }}>
+                🏥 Profissionais de Saúde
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Hepatite B
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Tríplice viral
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • dTpa
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                • Influenza (anual)
+              </Typography>
+              <Typography variant="body2">• Varicela</Typography>
+            </Box>
+          </Box>
         </Box>
 
-        <Box sx={{ bgcolor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: '20px', p: 4, color: 'white' }}>
+        <Box
+          sx={{
+            bgcolor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: '20px',
+            p: 4,
+            color: 'white',
+          }}
+        >
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
             📍 Onde se Vacinar
           </Typography>
-          <Grid container spacing={3}>
-            <Grid>
+
+          {/* Substituindo Grid container por Box flex container */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 24 / 8,
+              justifyContent: 'center',
+            }}
+          >
+            <Box sx={{ flex: '1 1 280px', maxWidth: '280px' }}>
               <Typography variant="body1" sx={{ mb: 2 }}>
                 <strong>Unidades Básicas de Saúde (UBS)</strong>
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                Todas as vacinas do calendário nacional estão disponíveis gratuitamente nas UBS. 
-                Basta levar documento de identidade e carteira de vacinação.
+                Todas as vacinas do calendário nacional estão disponíveis gratuitamente nas UBS. Basta
+                levar documento de identidade e carteira de vacinação.
               </Typography>
-            </Grid>
-            <Grid>
+            </Box>
+            <Box sx={{ flex: '1 1 280px', maxWidth: '280px' }}>
               <Typography variant="body1" sx={{ mb: 2 }}>
                 <strong>Campanhas de Vacinação</strong>
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                Fique atento às campanhas nacionais de vacinação, que acontecem durante o ano 
-                com horários estendidos e postos extras de atendimento.
+                Fique atento às campanhas nacionais de vacinação, que acontecem durante o ano com horários
+                estendidos e postos extras de atendimento.
               </Typography>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Box>
       </Container>
     </Box>
