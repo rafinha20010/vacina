@@ -1,11 +1,13 @@
 'use client';
 
-import { Container, Box, Typography, Grid, Card, CardContent, Accordion, AccordionSummary, AccordionDetails, Chip } from '@mui/material';
+import { Container, Box, Typography, Card, CardContent, Accordion, AccordionSummary, AccordionDetails, Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { Grid } from '@mui/material';
+
 
 const PageHeader = styled(Box)({
   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -193,6 +195,126 @@ export default function MitosPage() {
             </MythCard>
           ))}
         </Box>
-        </Container>
+
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h4" sx={{ fontWeight: 700, mb: 3, color: '#333' }}>
+            Verdades Comprovadas sobre Vacinas
+          </Typography>
+          <Grid container spacing={3}>
+            {truths.map((truth, index) => (
+              <Grid key={index}>
+                <TruthCard>
+                  <CheckCircleIcon sx={{ fontSize: 48, mb: 2 }} />
+                  <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
+                    {truth.title}
+                  </Typography>
+                  <Typography variant="body1" sx={{ opacity: 0.95 }}>
+                    {truth.content}
+                  </Typography>
+                </TruthCard>
+              </Grid>
+            ))}
+          </Grid>
         </Box>
-  )}
+
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h4" sx={{ fontWeight: 700, mb: 3, color: '#333' }}>
+            O Perigo da Desinformação
+          </Typography>
+          {dangerousMyths.map((item, index) => (
+            <Accordion
+              key={index}
+              sx={{
+                mb: 2,
+                borderRadius: '12px !important',
+                '&:before': { display: 'none' },
+                boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                sx={{
+                  '& .MuiAccordionSummary-content': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  },
+                }}
+              >
+                <WarningAmberIcon sx={{ color: '#f57c00' }} />
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  {item.title}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                  {item.description}
+                </Typography>
+                <Box sx={{ bgcolor: '#ffebee', borderRadius: '8px', p: 2 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5, color: '#c62828' }}>
+                    ⚠️ Impacto:
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {item.impact}
+                  </Typography>
+                </Box>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Box>
+
+        <Box sx={{ bgcolor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: '20px', p: 5, color: 'white', textAlign: 'center' }}>
+          <Typography variant="h4" sx={{ fontWeight: 700, mb: 3 }}>
+            Como Identificar Informações Confiáveis
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid>
+              <Box>
+                <Typography variant="h2" sx={{ mb: 2 }}>🔬</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                  Fontes Científicas
+                </Typography>
+                <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  Busque informações em revistas científicas, sites do Ministério da Saúde e OMS
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid>
+              <Box>
+                <Typography variant="h2" sx={{ mb: 2 }}>👨‍⚕️</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                  Profissionais
+                </Typography>
+                <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  Converse com médicos e profissionais de saúde qualificados
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid>
+              <Box>
+                <Typography variant="h2" sx={{ mb: 2 }}>📊</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                  Dados Verificados
+                </Typography>
+                <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  Confie em estudos com grandes amostras e revisão por pares
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid>
+              <Box>
+                <Typography variant="h2" sx={{ mb: 2 }}>❌</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                  Evite Fake News
+                </Typography>
+                <Typography variant="body2" sx={{ opacity: 0.9 }}>
+                  Desconfie de correntes, vídeos sem fonte e testemunhos isolados
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
+    </Box>
+  );
+}

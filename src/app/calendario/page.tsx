@@ -170,7 +170,7 @@ export default function CalendarioPage() {
 
           <Grid container spacing={3}>
             {ageGroups.map((group, index) => (
-              <Grid>
+              <Grid key={index}>
                 <AgeGroupCard>
                   <CardContent sx={{ textAlign: 'center', p: 3 }}>
                     <IconBox color={group.color}>
@@ -229,7 +229,7 @@ export default function CalendarioPage() {
           </Typography>
           <Grid container spacing={3}>
             {vaccineDetails.map((vaccine, index) => (
-              <Grid>
+              <Grid key={index}>
                 <Card sx={{ borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', height: '100%' }}>
                   <CardContent sx={{ p: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, color: '#667eea' }}>

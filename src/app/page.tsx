@@ -139,7 +139,7 @@ export default function HomePage() {
           </Typography>
           <Grid container spacing={4}>
             {features.map((feature, index) => (
-              <Grid>
+              <Grid key={index}>
                 <StyledCard>
                   <CardContent sx={{ textAlign: 'center', p: 3 }}>
                     <IconWrapper sx={{ margin: '0 auto 20px' }}>
@@ -164,7 +164,7 @@ export default function HomePage() {
           </Typography>
           <Grid container spacing={3}>
             {stats.map((stat, index) => (
-              <Grid>
+              <Grid key={index}>
                 <StatCard>
                   <Typography variant="h2" sx={{ fontWeight: 800, mb: 1 }}>
                     {stat.number}

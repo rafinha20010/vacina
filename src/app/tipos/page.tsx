@@ -122,7 +122,7 @@ export default function TiposPage() {
           </Typography>
 
           <Grid container spacing={4}>
-            {vaccineTypes.map((vaccine, index) => (
+            {vaccineTypes.map((vaccine) => (
               <Grid>
                 <VaccineCard>
                   <CardContent sx={{ p: 3 }}>
